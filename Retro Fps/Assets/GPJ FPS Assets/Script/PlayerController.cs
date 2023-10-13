@@ -26,13 +26,14 @@ public class PlayerController : MonoBehaviour
     private bool hasDied;
    
     [SerializeField] private TextMeshProUGUI healthText , ammoText; 
-    
+
     [SerializeField] private Animator anim; 
 
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
-
+    [SerializeField] private GameObject test;
+    [SerializeField] private bool pantallaActiva;
     
     private void Awake()
     {
@@ -44,14 +45,31 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthText.text = currentHealth.ToString() + "%";
-
         ammoText.text = currentAmmo.ToString();
+        test.SetActive(false);
+        pantallaActiva = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (pantallaActiva == true)
+        {
+            Time.timeScale = 0f;
+        }
+        if (pantallaActiva == false)
+        {
+            Time.timeScale = 1f;
+            test.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pantallaActiva = true;
+            test.SetActive(true);
+        }
+
         if(!hasDied)
         {
             //Player Movement
@@ -87,6 +105,8 @@ public class PlayerController : MonoBehaviour
                         {
                             hit.transform.parent.GetComponent<EnemyController>().TakeDamage();
                         }
+
+                        AudioController.instance.PlayGunshot();
                     }
                     else
                     {
@@ -124,6 +144,8 @@ public class PlayerController : MonoBehaviour
         
         healthText.text = currentHealth.ToString() + "%";
 
+        AudioController.instance.PlayPlayerHurt();
+
     }
 
     public void AddHealth(int healAmount)
@@ -141,5 +163,11 @@ public class PlayerController : MonoBehaviour
     public void UpdateAmmoUI()
     {
         ammoText.text = currentAmmo.ToString();
+    }
+
+    public void ResumeButtom()
+    {
+        Time.timeScale = 1f;
+        pantallaActiva = false;
     }
 }

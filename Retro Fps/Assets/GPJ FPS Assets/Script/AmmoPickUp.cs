@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AmmoPickUp : MonoBehaviour
@@ -13,7 +12,9 @@ public class AmmoPickUp : MonoBehaviour
         {
             PlayerController.instance.currentAmmo += ammoAmount;
             PlayerController.instance.UpdateAmmoUI();
+            AudioController.instance.PlayAmmoPickup();
             Destroy(gameObject);
+
         }
     } 
 }

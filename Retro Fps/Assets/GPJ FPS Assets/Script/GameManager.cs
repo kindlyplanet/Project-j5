@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
         LockCursor();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
-        {
+        {    
             UnlockCursor();
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) )
         {
             LockCursor();
         }
@@ -35,4 +37,5 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
 }
