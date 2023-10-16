@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour
             UnlockCursor();
         }
 
-        if(Input.GetMouseButton(0) )
+        if(Input.GetMouseButton(0) && !PauseMenu.instance.isPaused)
         {
             LockCursor();
         }
     }
     
-    private void LockCursor()
+    public void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

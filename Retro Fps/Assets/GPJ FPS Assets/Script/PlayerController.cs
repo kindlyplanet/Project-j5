@@ -32,8 +32,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
-    [SerializeField] private GameObject test;
-    [SerializeField] private bool pantallaActiva;
+    
     
     private void Awake()
     {
@@ -46,31 +45,15 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         healthText.text = currentHealth.ToString() + "%";
         ammoText.text = currentAmmo.ToString();
-        test.SetActive(false);
-        pantallaActiva = false;
-
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pantallaActiva == true)
-        {
-            Time.timeScale = 0f;
-        }
-        if (pantallaActiva == false)
-        {
-            Time.timeScale = 1f;
-            test.SetActive(false);
-        }
+       
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pantallaActiva = true;
-            test.SetActive(true);
-        }
-
-        if(!hasDied)
+        if(!hasDied && !PauseMenu.instance.isPaused)
         {
             //Player Movement
             moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -165,9 +148,4 @@ public class PlayerController : MonoBehaviour
         ammoText.text = currentAmmo.ToString();
     }
 
-    public void ResumeButtom()
-    {
-        Time.timeScale = 1f;
-        pantallaActiva = false;
-    }
 }
