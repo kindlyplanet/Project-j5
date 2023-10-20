@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/GPJ FPS Assets/Scene/Main Menu.unity
     guid: 3c7325a1fdb7fd246a70ba755594f974
   - enabled: 1
-    path: Assets/GPJ FPS Assets/Scene/Startup.unity
+    path: Assets/GPJ FPS Assets/Scene/Level 1.unity
     guid: a85d1aefaec7c6a47bc399860f255f6b
   m_configObjects: {}
