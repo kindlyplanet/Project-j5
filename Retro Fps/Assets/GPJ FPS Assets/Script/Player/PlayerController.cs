@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
+    [Header ("Transition")]
+    [SerializeField] private Animation transition; 
+    [SerializeField] private string nombreAnim; 
+    [SerializeField] private string tagBoton; 
+
     
     
     private void Awake()
@@ -148,4 +153,11 @@ public class PlayerController : MonoBehaviour
         ammoText.text = currentAmmo.ToString();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(tagBoton))
+        {
+            transition.Play(nombreAnim); 
+        }
+    }
 }
