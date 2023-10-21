@@ -6,28 +6,35 @@ using UnityEngine.SceneManagement;
 public class WallButtom : MonoBehaviour
 {
 
-    [SerializeField] private string cambioDeEscena;  
+    [SerializeField] private string changeScene;
+    [SerializeField] private GameObject endTransition;
+    [SerializeField] private float waitingTime; 
 
+    private bool canLoadScene = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start() 
     {
-        
+        endTransition.SetActive(false);    
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !canLoadScene)
         {
-            SceneManager.LoadScene(cambioDeEscena); 
-            
-
+           StartCoroutine(PlayTransitionAndLoadScene());
         }
+    }
+
+    private IEnumerator PlayTransitionAndLoadScene()
+    {
+        
+        endTransition.SetActive(true);
+        Debug.Log("activo");
+
+        yield return new WaitForSeconds(waitingTime);
+        
+        SceneManager.LoadScene(changeScene);
+
+        canLoadScene = true;
     }
 }

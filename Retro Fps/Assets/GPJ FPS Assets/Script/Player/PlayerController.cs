@@ -8,35 +8,42 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     
+    [Header("Player Rigidbody")]
     [SerializeField] private Rigidbody2D rb;
     
+    [Header("Player Move Speed")]
     [SerializeField] private float moveSpeed;
     
+    [Header("Mouse Sensitivity")]
     [SerializeField] private float mouseSensitivity;
     
+    [Header("Player View")]
     [SerializeField] private Camera viewCam;
     
+    [Header("Gun/Bullet animation")]
     [SerializeField] private GameObject bulletImpact;
     [SerializeField] private Animator gunAnim;
+    
+    [Header("Current Ammo")]
     public int currentAmmo;
     
+    [Header("Current/Max Health")]
     [SerializeField] private int maxHealth;
     private int currentHealth;
+    
+    [Header("Death screen")]
     [SerializeField] private GameObject deathScreen;
     private bool hasDied;
    
-    [SerializeField] private TextMeshProUGUI healthText , ammoText; 
-
+    [Header("UI display of Health and Ammo")]
+    [SerializeField] private TextMeshProUGUI healthText; 
+    [SerializeField] private TextMeshProUGUI ammoText;
+    
+    [Header("Player Animator")]
     [SerializeField] private Animator anim; 
 
     private Vector2 moveInput;
     private Vector2 mouseInput;
-
-    [Header ("Transition")]
-    [SerializeField] private Animation transition; 
-    [SerializeField] private string nombreAnim; 
-    [SerializeField] private string tagBoton; 
-
     
     
     private void Awake()
@@ -153,11 +160,4 @@ public class PlayerController : MonoBehaviour
         ammoText.text = currentAmmo.ToString();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(tagBoton))
-        {
-            transition.Play(nombreAnim); 
-        }
-    }
 }
