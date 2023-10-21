@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoText;
     
     [Header("Player Animator")]
-    [SerializeField] private Animator anim; 
+    [SerializeField] private Animator anim;
+
 
     private Vector2 moveInput;
     private Vector2 mouseInput;
@@ -159,5 +160,6 @@ public class PlayerController : MonoBehaviour
     {
         ammoText.text = currentAmmo.ToString();
     }
+
 
 }

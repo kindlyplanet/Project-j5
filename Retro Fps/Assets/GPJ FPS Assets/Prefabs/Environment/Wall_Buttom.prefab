@@ -74,9 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeScene: Credits
-  endTransition: {fileID: 2959938380668611841, guid: fce2f47fdb4bdb6448fe9fea64272045, type: 3}
-  transitionAnimator: {fileID: 1611397042832310261, guid: fce2f47fdb4bdb6448fe9fea64272045, type: 3}
-  waitingTime: 1.5
+  timer: 1.5
 --- !u!1 &8831202116230618870
 GameObject:
   m_ObjectHideFlags: 0
