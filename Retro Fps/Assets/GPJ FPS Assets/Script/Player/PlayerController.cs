@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Death screen")]
     [SerializeField] private GameObject deathScreen;
-    private bool hasDied;
+    private bool hasDied = false;
    
     [Header("UI display of Health and Ammo")]
     [SerializeField] private TextMeshProUGUI healthText; 
@@ -131,11 +131,19 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damageAmount;
 
-        if(currentHealth <= 0)
+        if(currentHealth <= 0 )
         {
             deathScreen.SetActive(true);
             hasDied = true;
             currentHealth = 0;
+            //
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            this.enabled = false;
+            GameObject.FindObjectOfType<GameManager>().enabled = false;
+
+
         }
         
         healthText.text = currentHealth.ToString() + "%";
