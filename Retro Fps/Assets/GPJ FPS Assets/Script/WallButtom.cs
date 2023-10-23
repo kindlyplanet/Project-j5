@@ -7,27 +7,15 @@ public class WallButtom : MonoBehaviour
 {
 
     [SerializeField] private string changeScene;
-    [SerializeField] private float timer;
     
-    
-    private void Start() 
-    {
-          
-    }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") )
         {
-          StartCoroutine(WaitAndLoadScene());
+          SceneManager.LoadScene(changeScene);
         }
     }
 
-    private IEnumerator WaitAndLoadScene()
-    {
-        yield return new WaitForSeconds(timer);
-        
-        SceneManager.LoadScene(changeScene);
-
-    }
+  
 }

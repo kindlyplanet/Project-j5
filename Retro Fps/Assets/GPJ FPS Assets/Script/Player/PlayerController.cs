@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
                             hit.transform.parent.GetComponent<EnemyController>().TakeDamage();
                         }
 
-                        AudioController.instance.PlayGunshot();
+                        AudioController.instance.PlaySFX("gunshot");
                     }
                     else
                     {
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         
         healthText.text = currentHealth.ToString() + "%";
 
-        AudioController.instance.PlayPlayerHurt();
+        AudioController.instance.PlaySFX("playerhurt");
 
     }
 

@@ -11,7 +11,7 @@ public class HealthPickUp : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerController.instance.AddHealth(healthAmount);
-            AudioController.instance.PlayHealthPickup();
+            AudioController.instance.PlaySFX("healthpickup");
             Destroy(gameObject);
         }    
     }

@@ -17,10 +17,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform firePoint;
 
+    [SerializeField] private Animator e_Anim;
+    private bool isHurt = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+            
     }
 
     // Update is called once per frame
@@ -50,16 +53,35 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage()
     {
-        health--;
-        if (health <= 0 )
+        
+        if (!isHurt)
         {
-            Destroy(gameObject);
-            Instantiate(explosion, transform.position, transform.rotation);
-            AudioController.instance.PlayEnemyDeath();
+            health--;
+            if (health <= 0 )
+            {
+                Destroy(gameObject);
+                Instantiate(explosion, transform.position, transform.rotation);
+                AudioController.instance.PlaySFX("enemydeath");
+
+                StartCoroutine(ResetHurtState());
+            }
+            else
+            {
+                AudioController.instance.PlaySFX("enemyshoot");
+                isHurt = true;
+                e_Anim.SetBool("isHurt",true);
+                StartCoroutine(ResetHurtState());
+            }
         }
-        else
-        {
-            AudioController.instance.PlayEnemyShot();    
-        }
+        
     }
+
+    private IEnumerator ResetHurtState()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isHurt = false;
+        e_Anim.SetBool("isHurt",false);
+    }
+
+  
 }
