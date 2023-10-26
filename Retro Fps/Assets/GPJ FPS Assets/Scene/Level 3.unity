@@ -24716,5 +24716,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7508222571337639709, guid: c548aa5d296ffd745ba86bffcab39553, type: 3}
+      propertyPath: selectMusic
+      value: Level 3 Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508222571337639709, guid: c548aa5d296ffd745ba86bffcab39553, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508222571337639709, guid: c548aa5d296ffd745ba86bffcab39553, type: 3}
+      propertyPath: musicSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6346053f3f4411f47a72534bdef14b4a, type: 3}
+    - target: {fileID: 7508222571337639709, guid: c548aa5d296ffd745ba86bffcab39553, type: 3}
+      propertyPath: musicSounds.Array.data[1].name
+      value: Level 3 Music
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c548aa5d296ffd745ba86bffcab39553, type: 3}
