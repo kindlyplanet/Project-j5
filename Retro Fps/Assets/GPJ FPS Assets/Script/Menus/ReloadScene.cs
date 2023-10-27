@@ -9,6 +9,7 @@ public class ReloadScene : MonoBehaviour
 
     public void ResetScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneToRestart);
     }
 

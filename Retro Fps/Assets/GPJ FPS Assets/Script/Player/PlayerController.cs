@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = true;
             this.enabled = false;
             GameObject.FindObjectOfType<GameManager>().enabled = false;
-
+            AudioController.instance.PlayMusic("GameOver");
 
         }
         
@@ -168,6 +168,4 @@ public class PlayerController : MonoBehaviour
     {
         ammoText.text = currentAmmo.ToString();
     }
-
-
 }

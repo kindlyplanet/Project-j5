@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/GPJ FPS Assets/Scene/Level 2.unity
     guid: fc82ef1160f04df4baabc0c2eaedb532
   - enabled: 1
+    path: Assets/GPJ FPS Assets/Scene/Level 3.unity
+    guid: e10cefab9a740194798e8c88af6d27d2
+  - enabled: 1
     path: Assets/GPJ FPS Assets/Scene/Credits.unity
     guid: 82e57c26949d96b4eaac4d33e6baa91f
   m_configObjects: {}
