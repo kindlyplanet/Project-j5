@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player View")]
     [SerializeField] private Camera viewCam;
     
+    
     [Header("Gun/Bullet animation")]
     [SerializeField] private GameObject bulletImpact;
     [SerializeField] private Animator gunAnim;
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Current/Max Health")]
     [SerializeField] private int maxHealth;
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
     
     [Header("Death screen")]
     [SerializeField] private GameObject deathScreen;
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
 
         if(!hasDied && !PauseMenu.instance.isPaused)
         {
@@ -82,7 +84,13 @@ public class PlayerController : MonoBehaviour
         
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z - mouseInput.x);
         
-            viewCam.transform.localRotation = Quaternion.Euler(viewCam.transform.localRotation.eulerAngles + new Vector3(0f,mouseInput.y, 0f));
+            //limit
+            float maxAngle = 160;
+            float minAngle = 10;
+
+            Vector3 rotAmount = viewCam.transform.localRotation.eulerAngles + new Vector3(0f,mouseInput.y, 0f);
+            
+            viewCam.transform.localRotation = Quaternion.Euler(rotAmount.x,Mathf.Clamp(rotAmount.y,minAngle,maxAngle),rotAmount.z);
 
             //Shooting
         
@@ -92,6 +100,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Ray ray = viewCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
                     RaycastHit hit;
+                    
+
                     if (Physics.Raycast(ray, out hit))
                     {
                         //Debug.Log("Im looking at " + hit.transform.name);
@@ -99,8 +109,25 @@ public class PlayerController : MonoBehaviour
 
                         if (hit.transform.tag == "Enemy")
                         {
-                            hit.transform.parent.GetComponent<EnemyController>().TakeDamage();
+                           if (hit.transform.CompareTag("Enemy"))
+                            {
+                                if (hit.transform.GetComponentInParent<EnemyController>() != null)
+                                {
+                                    hit.transform.GetComponentInParent<EnemyController>().TakeDamage();
+                                }
+                                else if (hit.transform.GetComponentInParent<EnemyType2>() != null)
+                                {
+                                    hit.transform.GetComponentInParent<EnemyType2>().TakeDamage();
+                                }
+                                else if(hit.transform.GetComponentInParent<Boss>() != null)
+                                {
+                                    hit.transform.GetComponentInParent<Boss>().TakeDamage();
+                                }
+                                // Agrega más comprobaciones para otros tipos de enemigos aquí
+                            }
+
                         }
+                       
 
                         AudioController.instance.PlaySFX("gunshot");
                     }
@@ -108,12 +135,15 @@ public class PlayerController : MonoBehaviour
                     {
                         Debug.Log("Im looking at nothing!");
                     }
+                 
                     currentAmmo--;
                     gunAnim.SetTrigger("Shoot");
                     UpdateAmmoUI();
                 }
             
             }
+
+            
 
             if(moveInput != Vector2.zero)
             {
@@ -150,6 +180,11 @@ public class PlayerController : MonoBehaviour
 
         AudioController.instance.PlaySFX("playerhurt");
 
+    }
+
+    public void TakeDamageFromExplosion(int damageAmount)
+    {
+        TakeDamage(damageAmount);
     }
 
     public void AddHealth(int healAmount)
