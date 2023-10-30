@@ -73,8 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a474e074a0a4db408c4aab0be57effc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeScene: Credits
-  timer: 1.5
+  trancision: {fileID: 4702136478877986538, guid: 7059e4004e3239d4981595dd66f8e69f, type: 3}
+  tiempoDeCambio: 1
+  trancisionActiva: 0
 --- !u!1 &8831202116230618870
 GameObject:
   m_ObjectHideFlags: 0
